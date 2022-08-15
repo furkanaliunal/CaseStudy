@@ -5,7 +5,7 @@
     <parent>
         <groupId>furkan.studio</groupId>
         <artifactId>casestudy</artifactId>
-        <version>0.1</version>
+        <version>1.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -42,11 +42,10 @@
             <version>4.1.74.Final</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
-            <version>[1.26,)</version>
+            <version>[1.30,)</version>
             <scope>compile</scope>
         </dependency>
 
