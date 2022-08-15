@@ -1,0 +1,8 @@
+name: CaseStudy
+version: '${project.version}'
+main: furkan.studio.casestudy.CaseStudy
+api-version: 1.19
+depend: [ JedisDependency ]
+authors: [ Onwexrys ]
+description: Multiserver TPA request. It's an example project to show my skills on many things
+website: https://github.com/furkanaliunal
