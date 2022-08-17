@@ -1,0 +1,9 @@
+#Database Settings
+Redis:
+  Hostname: 127.0.0.1
+  Port: 6379
+  Password: ""
+  #Ticks for expiration
+  Expiration-Threshold: 60
+  PendingTeleportsKey: "casestudy#pendingteleports"
+  OnlinePlayersKey: "casestudy#onlineplayers"

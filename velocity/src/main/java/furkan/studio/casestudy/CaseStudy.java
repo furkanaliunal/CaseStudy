@@ -26,6 +26,7 @@ public class CaseStudy {
 
 
     public static ProxyServer server;
+    public static CaseStudy instance;
 
 
     @Getter
@@ -39,6 +40,7 @@ public class CaseStudy {
     @Inject
     public CaseStudy(ProxyServer server, Logger logger, @DataDirectory Path dataDirectory) {
         CaseStudy.server = server;
+        CaseStudy.instance = this;
         this.logger = logger;
         this.dataDirectory = dataDirectory;
         this.config = new Configuration(dataDirectory, "config.yml");

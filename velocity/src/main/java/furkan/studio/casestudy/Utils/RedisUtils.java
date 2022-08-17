@@ -15,8 +15,8 @@ public class RedisUtils {
     private static Integer defaultPort = 6379;
     private static String defaultIP = "localhost";
     public static boolean initalizeFromConfig(final Logger logger, final Configuration configuration){
-        RedisUtils.teleportsKey = configuration.getOrDefault("Redis.EventTableKey", "casestudy#pendingteleports");
-        RedisUtils.onlinePlayersKey = configuration.getOrDefault("Redis.WhitelistedTableKey", "eventmanager#whitelist");
+        RedisUtils.teleportsKey = configuration.getOrDefault("Redis.PendingTeleportsKey", "casestudy#pendingteleports");
+        RedisUtils.onlinePlayersKey = configuration.getOrDefault("Redis.OnlinePlayersKey", "casestudy#onlineplayers");
         return RedisUtils.initialize(logger, configuration.getOrDefault("Redis.Hostname",null), configuration.getOrDefault("Redis.Port", null), configuration.getOrDefault("Redis.Password", null));
     }
     public static boolean initialize(final Logger logger, final String ip, final Integer port, final String password){
