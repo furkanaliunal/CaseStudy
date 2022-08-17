@@ -1,4 +1,4 @@
-package furkan.studio.casestudy;
+package furkan.studio.casestudy.velocity;
 
 
 import com.google.inject.Inject;
@@ -8,8 +8,8 @@ import com.velocitypowered.api.event.proxy.ProxyShutdownEvent;
 import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
-import furkan.studio.casestudy.Utils.Configuration;
-import furkan.studio.casestudy.Utils.RedisUtils;
+import furkan.studio.casestudy.velocity.Utils.Configuration;
+import furkan.studio.casestudy.velocity.Utils.RedisUtils;
 import lombok.Getter;
 import org.slf4j.Logger;
 

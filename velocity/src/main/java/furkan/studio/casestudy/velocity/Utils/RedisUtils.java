@@ -1,4 +1,4 @@
-package furkan.studio.casestudy.Utils;
+package furkan.studio.casestudy.velocity.Utils;
 
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.slf4j.Logger;

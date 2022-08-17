@@ -1,8 +1,8 @@
-package furkan.studio.casestudy;
+package furkan.studio.casestudy.velocity;
 
 import com.velocitypowered.api.proxy.ProxyServer;
 import com.velocitypowered.api.scheduler.ScheduledTask;
-import furkan.studio.casestudy.Utils.RedisUtils;
+import furkan.studio.casestudy.velocity.Utils.RedisUtils;
 import redis.clients.jedis.Jedis;
 
 import java.util.ArrayList;

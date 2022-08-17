@@ -1,4 +1,4 @@
-package furkan.studio.casestudy.Utils;
+package furkan.studio.casestudy.velocity.Utils;
 
 
 import lombok.Getter;
