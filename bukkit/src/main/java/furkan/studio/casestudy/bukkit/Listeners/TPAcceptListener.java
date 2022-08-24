@@ -22,17 +22,19 @@ public class TPAcceptListener {
             public void run() {
                 Jedis read = RedisUtils.getJedis();
                 Jedis write = RedisUtils.getJedis();
-                Set<String> teleportTargetUUIDs =  read.hkeys(RedisUtils.acceptedTeleportsKey);
-                teleportTargetUUIDs.forEach(strUUID -> {
-                    final UUID targetUUID = UUID.fromString(strUUID);
+
+                Set<String> teleportLines = read.smembers(RedisUtils.acceptedTeleportsKey);
+                teleportLines.forEach(line -> {
+                    final String[] split = line.split(", ");
+                    final UUID targetUUID = UUID.fromString(split[0]);
                     final Player targetPlayer = Bukkit.getPlayer(targetUUID);
                     if (targetPlayer == null ||(!targetPlayer.isOnline())) return;
 
-                    final String playerUUID = read.hget(RedisUtils.acceptedTeleportsKey, strUUID);
-                    final Player player = Bukkit.getPlayer(UUID.fromString(playerUUID));
+                    final String playerStrUUID = split[1];
+                    final Player player = Bukkit.getPlayer(UUID.fromString(playerStrUUID));
                     if (player == null || (!player.isOnline())) return;
+                    write.srem(RedisUtils.acceptedTeleportsKey, line);
 
-                    write.hdel(RedisUtils.acceptedTeleportsKey, strUUID);
                     Teleportation.processTeleportation(new Teleportation(player, targetPlayer));
                 });
                 read.close();

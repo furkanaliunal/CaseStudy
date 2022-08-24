@@ -30,7 +30,7 @@ public class AcceptedTeleportation extends BaseTeleportation {
 
     public void writeToRedis() {
         final Jedis jedis = RedisUtils.getJedis();
-        jedis.hset(RedisUtils.acceptedTeleportsKey, getTargetPlayer().getUniqueId().toString(), getPlayer().getUniqueId().toString());
+        jedis.sadd(RedisUtils.acceptedTeleportsKey, getTargetPlayer().getUniqueId().toString() + ", " + getPlayer().getUniqueId().toString());
         jedis.close();
     }
     public void writeToMongo(){
