@@ -42,5 +42,6 @@ Can be done:
 
 - Download the latest version of the plugin from repository releases
 - Place the plugin in to the plugins folder of all servers (Spigot and Velocity both.)
+- !Warning! This plugin requires any MongoDBDependency and JedisDependency to run(dependencies) you can use these ones [Jedis](https://github.com/furkanaliunal/JedisDependency) and [MongoDB](https://github.com/furkanaliunal/MongoDBDependency)
 - Configure the database access in the config.yml
 - Done.
