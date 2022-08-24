@@ -8,16 +8,41 @@ import com.mongodb.client.MongoDatabase;
 import lombok.Getter;
 import org.bukkit.configuration.file.FileConfiguration;
 
+/**
+ * Created by Onwexrys
+ * This is library class to initialize MongoDB connection.
+ */
 public class MongoUtils {
+    /**
+     * Reference of history collection
+     */
     public static String teleportHistoryCollection = null;
+    /**
+     * MongoClient instance
+     * @see MongoClient
+     */
     @Getter
     private static MongoClient mongoClient = null;
+    /**
+     * MongoDatabase instance
+     * @see MongoDatabase
+     */
     @Getter
     private static MongoDatabase mongoDatabase = null;
+    /**
+     * MongoCollection instance
+     * @see MongoCollection
+     */
     @Getter
     private static MongoCollection collection = null;
 
-
+    /**
+     * Reads the MongoDB connection data from config and uses it to initialize MongoDB connection.
+     * Alternative way to initialize MongoDB {@link MongoUtils#initialize(String, Integer, String, String, String, String)} method.
+     * @param config
+     * @see FileConfiguration
+     * @return
+     */
     public static boolean initializeFromConfig(final FileConfiguration config){
         MongoUtils.teleportHistoryCollection = config.getString("MongoDB.TeleportHistoryCollection", "teleporthistory");
         return MongoUtils.initialize(
@@ -29,6 +54,17 @@ public class MongoUtils {
                 config.getString("MongoDB.Password", null)
         );
     }
+
+    /**
+     * Initializes MongoDB connection.
+     * @param host
+     * @param port
+     * @param stringDatabase
+     * @param stringCollection
+     * @param username
+     * @param password
+     * @return
+     */
     public static boolean initialize(final String host, final Integer port, final String stringDatabase, final String stringCollection, final String username, final String password) {
         String connectionString =
                 ("mongodb+srv://" + username) +
@@ -50,6 +86,9 @@ public class MongoUtils {
         return true;
     }
 
+    /**
+     * Closes the MongoDB connection.
+     */
     public static void close(){
         if (mongoClient != null) mongoClient.close();
     }

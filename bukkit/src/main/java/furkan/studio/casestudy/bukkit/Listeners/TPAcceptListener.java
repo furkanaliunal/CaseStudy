@@ -5,17 +5,32 @@ import furkan.studio.casestudy.bukkit.Teleportation;
 import furkan.studio.casestudy.bukkit.Utils.RedisUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import redis.clients.jedis.Jedis;
 
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * Created by Onwexrys
+ * This class is used to handle the accepted teleport requests through redis
+ * Reads the data from redis and sends the player to the destination
+ */
 public class TPAcceptListener {
+    /**
+     * This method is used to handle the accepted teleport requests through redis
+     * Reads the data from redis and sends the player to the destination
+     */
     public TPAcceptListener() {
         runTPAReceiver();
     }
 
+    /**
+     * @see Teleportation#processTeleportation(Teleportation)
+     * @see Jedis
+     * @see BukkitRunnable#runTaskTimer(Plugin, long, long)
+     */
     private void runTPAReceiver() {
         new BukkitRunnable(){
             @Override
