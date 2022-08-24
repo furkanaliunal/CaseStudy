@@ -1,9 +1,28 @@
-#Database Settings
+# Redis settings to access the database
 Redis:
   Hostname: 127.0.0.1
   Port: 6379
   Password: ""
-  #Ticks for expiration
-  Expiration-Threshold: 60
-  PendingTeleportsKey: "casestudy#pendingteleports"
-  OnlinePlayersKey: "casestudy#onlineplayers"
+  AcceptedTeleportsKey: "casestudy#accepted_teleports"
+
+# Mongo settings to access the database
+MongoDB:
+  SRVEnabled : false
+  Hostname: 127.0.0.1
+  Port: 27017
+  Username: ""
+  Password: ""
+  Database: "casestudy"
+  TeleportHistoryCollection: "teleporthistory"
+
+# Here you can set specific permission check for every single server
+# When it is set, It checks if the player has the permission to teleport to the target server
+RestrictedServers:
+  clanwars: "clanwars.teleport"
+# servername: permission
+
+# Here you can set teleportation settings for players
+Configuration:
+  TeleportRequestTimeout: 6 #seconds
+  TeleportListHistorySize: 10
+  CountdownPerTeleportRequest: 60 #seconds

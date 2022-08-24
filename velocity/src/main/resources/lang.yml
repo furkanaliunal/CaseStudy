@@ -1,0 +1,44 @@
+# This yaml file is responsible for messages
+# Messages have specific arguments like player, target, server name, location and more.
+# But unfortunately, you can use only the arguments that are already in the message by default.
+# They are called using "{x}"
+# You can change the locations of arguments or remove them.
+# You can also remove a message to disable message send on event
+
+# Language: English
+
+TPA_LIST_TITLE_MESSAGE: "§eHere is your TP history §7(Last 10)\n§7§oHover your mouse to see details"
+TPA_LIST_INTERMEDIATE_LINES: "§6--------------------"
+TPA_LIST_SUMMARY_LINE: "§e{0}. You §m  §r§e>  §a{1}"
+TPA_LIST_HOVER_DETAILS: "§2ServerName: §r{0}\n§aLocation: §r{1}\n§2Player: §r{2}\n§aDate: §r{3}"
+
+TPA_COMMAND_HELP: "§6Usage : §7/tpa <playername or list>"
+TPA_PLAYER_NOT_FOUND: "§cPlayer not found"
+TPA_CANT_TPA_TO_YOURSELF: "§cYou can't teleport to yourself"
+TPA_REQUEST_SENT: "§aRequest sent to §e{0}"
+TPA_REQUEST_REJECTED: "§cYour teleport request to §a{0} §cis §4rejected"
+TPA_REQUEST_TIMED_OUT: "§cYour teleport request to §a{0} is §etimed out"
+TPA_REQUEST_IN_COUNTDOWN: "§cYou must wait §e{0} §cseconds before you can send another teleport request"
+TPA_CANT_TPA_THIS_SERVER: "§cYou can't teleport to this server"
+TPA_ALREADY_SEND: "§cYou already have a pending request"
+
+TPA_REQUEST_RECEIVED: "§e{0} §7wants to teleport you."
+#TPA_REQUEST_RECEIVED: "§e{0} §7wants to teleport you.\n§a/tpaccept {0} §7to accept"
+#TPA_REQUEST_RECEIVED_HoverMessage: "§eClick to accept"
+#TPA_REQUEST_RECEIVED_RunCommand: "/tpaccept {0}"
+
+TPA_CONFIRM: "§2[§aClick To Accept§2]"
+TPA_CONFIRM_HoverMessage: "§eClick to accept"
+TPA_CONFIRM_RunCommand: "/tpaccept {0}"
+
+TPA_DENY: "§4[§cClick To Deny§4]"
+TPA_DENY_HoverMessage: "§eClick to deny"
+TPA_DENY_RunCommand: "/tpadeny {0}"
+
+TPA_ACCEPT_COMMAND_HELP: "§6Usage : §7/tpaaccept <playername>"
+TPA_ACCEPT_PLAYER_NOT_FOUND: "§cPlayer not found"
+
+
+TPA_DENY_COMMAND_HELP: "§6Usage : §7/tpadeny <playername>"
+TPA_DENY_PLAYER_NOT_FOUND: "§cPlayer not found"
+TPA_DENY_SUCCESSFUL: "§eTeleport request from §a{0} §edenied"
