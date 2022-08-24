@@ -1,11 +1,13 @@
-#Database Settings
+# Redis settings to access the database
 Redis:
   Hostname: 127.0.0.1
   Port: 6379
   Password: ""
   AcceptedTeleportsKey: "casestudy#accepted_teleports"
 
+# Mongo settings to access the database
 MongoDB:
+  SRVEnabled : false
   Hostname: 127.0.0.1
   Port: 27017
   Username: ""
