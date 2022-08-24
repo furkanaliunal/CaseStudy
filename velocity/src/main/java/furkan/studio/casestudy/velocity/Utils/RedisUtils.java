@@ -10,13 +10,11 @@ import java.time.Duration;
 
 public class RedisUtils {
     public static JedisPool jedisPool = null;
-    public static String teleportsKey = "casestudy#pendingteleports";
-    public static String onlinePlayersKey = "casestudy#onlineplayers";
+    public static String acceptedTeleportsKey = "casestudy#acceptedteleports";
     private static Integer defaultPort = 6379;
     private static String defaultIP = "localhost";
-    public static boolean initalizeFromConfig(final Logger logger, final Configuration configuration){
-        RedisUtils.teleportsKey = configuration.getOrDefault("Redis.PendingTeleportsKey", "casestudy#pendingteleports");
-        RedisUtils.onlinePlayersKey = configuration.getOrDefault("Redis.OnlinePlayersKey", "casestudy#onlineplayers");
+    public static boolean initializeFromConfig(final Logger logger, final Configuration configuration){
+        RedisUtils.acceptedTeleportsKey = configuration.getOrDefault("Redis.AcceptedTeleportsKey", "casestudy#accepted_teleports");
         return RedisUtils.initialize(logger, configuration.getOrDefault("Redis.Hostname",null), configuration.getOrDefault("Redis.Port", null), configuration.getOrDefault("Redis.Password", null));
     }
     public static boolean initialize(final Logger logger, final String ip, final Integer port, final String password){
@@ -54,6 +52,9 @@ public class RedisUtils {
     }
     public static Jedis getJedis(){
         return RedisUtils.jedisPool.getResource();
+    }
+    public static void close(){
+        RedisUtils.jedisPool.close();
     }
 
 }
