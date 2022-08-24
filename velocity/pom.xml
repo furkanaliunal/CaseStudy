@@ -35,17 +35,10 @@
             <version>1.18.22</version>
             <scope>provided</scope>
         </dependency>
-
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-buffer</artifactId>
-            <version>4.1.74.Final</version>
-            <scope>provided</scope>
-        </dependency>
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
-            <version>[1.30,)</version>
+            <version>1.30</version>
             <scope>compile</scope>
         </dependency>
 
@@ -53,6 +46,13 @@
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
             <version>4.1.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver-sync</artifactId>
+            <version>4.7.1</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
