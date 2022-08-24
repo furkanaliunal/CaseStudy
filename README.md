@@ -36,3 +36,11 @@ Features:
 Can be done:
 - Teleportation throttler with some animations
 - Sound notifications on request received
+- Disable MongoDB log messages
+
+## Installation Steps:
+
+- Download the latest version of the plugin from repository releases
+- Place the plugin in to the plugins folder of all servers (Spigot and Velocity both.)
+- Configure the database access in the config.yml
+- Done.
