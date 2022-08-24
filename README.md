@@ -1,7 +1,7 @@
 # CaseStudy
 
 [![wakatime](https://wakatime.com/badge/user/96162fe4-764c-435f-8a96-8e183553f72d/project/37d1a3b4-0737-4f82-9275-d9584dd8dc6d.svg)](https://wakatime.com/badge/user/96162fe4-764c-435f-8a96-8e183553f72d/project/37d1a3b4-0737-4f82-9275-d9584dd8dc6d)
-
+[![javadoc](https://javadoc.io/badge2/furkan.studio/casestudy/javadoc.svg)](https://javadoc.io/doc/furkan.studio/casestudy)
 <br>
 
 This repository is a simple test case about how I use:
