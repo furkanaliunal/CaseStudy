@@ -8,18 +8,69 @@ import redis.clients.jedis.JedisPool;
 
 import java.time.Duration;
 
+/**
+ * Created by Onwexrys
+ * This is library class to initialize Redis connection.
+ * @see JedisPool
+ * @see JedisFactory
+ * @see Jedis
+ * @see GenericObjectPoolConfig
+ */
 public class RedisUtils {
+    /**
+     * Instance of Redis connection pool
+     * This is used to get Jedis resource from pool.
+     * @see JedisPool
+     */
     public static JedisPool jedisPool = null;
+    /**
+     * Key to get accepted teleports data from Redis
+     */
     public static String acceptedTeleportsKey = "casestudy#acceptedteleports";
-    private static Integer defaultPort = 6379;
+    /**
+     * Default ip for redis
+     */
     private static String defaultIP = "localhost";
+    /**
+     * Default port for Redis
+     */
+    private static Integer defaultPort = 6379;
+
+    /**
+     * Reads the Redis connection data from config and uses it to initialize Redis connection.
+     * Alternative way to initialize Redis {@link RedisUtils#initialize(Logger, String, Integer, String)} method.
+     * @see Configuration
+     * @see Logger
+     * @param logger
+     * @param configuration
+     * @return
+     */
     public static boolean initializeFromConfig(final Logger logger, final Configuration configuration){
         RedisUtils.acceptedTeleportsKey = configuration.getOrDefault("Redis.AcceptedTeleportsKey", "casestudy#accepted_teleports");
         return RedisUtils.initialize(logger, configuration.getOrDefault("Redis.Hostname",null), configuration.getOrDefault("Redis.Port", null), configuration.getOrDefault("Redis.Password", null));
     }
+
+    /**
+     * Gets the default pool configuration and initializes Redis connection.
+     * {@link RedisUtils#initialize(Logger, GenericObjectPoolConfig, String, Integer, String)}
+     * @param logger
+     * @param ip
+     * @param port
+     * @param password
+     * @return
+     */
     public static boolean initialize(final Logger logger, final String ip, final Integer port, final String password){
         return RedisUtils.initialize(logger, buildPoolConfig(), ip, port, password);
     }
+    /**
+     * Initializes Redis connection.
+     * @param logger
+     * @param configuration
+     * @param ip
+     * @param port
+     * @param password
+     * @return
+     */
     public static boolean initialize(final Logger logger, final GenericObjectPoolConfig configuration, final String ip, final Integer port, final String password){
         RedisUtils.jedisPool = new JedisPool(configuration, ip == null ? defaultIP : ip , port == null ? defaultPort : port, 10000);
         boolean hasPassword = !(password == null || password.equals("") || password.isEmpty());
@@ -33,6 +84,11 @@ public class RedisUtils {
         return true;
     }
 
+    /**
+     * Gets the default pool configuration.
+     * @see GenericObjectPoolConfig
+     * @return
+     */
     private static GenericObjectPoolConfig buildPoolConfig() {
         final GenericObjectPoolConfig poolConfig = new GenericObjectPoolConfig();
         poolConfig.setMaxTotal(256);
@@ -47,12 +103,24 @@ public class RedisUtils {
         poolConfig.setBlockWhenExhausted(true);
         return poolConfig;
     }
+    /**
+     * Gets the Jedis resource from pool.
+     * Alternative way to get Jedis resource {@link RedisUtils#getJedis()} method.
+     * @return
+     */
     public static Jedis getRedis(){
         return RedisUtils.getJedis();
     }
+    /**
+     * Gets the Jedis resource from pool.
+     * @return
+     */
     public static Jedis getJedis(){
         return RedisUtils.jedisPool.getResource();
     }
+    /**
+     * Closes the Jedis resource.
+     */
     public static void close(){
         RedisUtils.jedisPool.close();
     }

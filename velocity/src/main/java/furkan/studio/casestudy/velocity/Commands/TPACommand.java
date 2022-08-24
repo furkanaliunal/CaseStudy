@@ -4,6 +4,7 @@ import com.velocitypowered.api.command.CommandSource;
 import com.velocitypowered.api.command.SimpleCommand;
 import com.velocitypowered.api.proxy.Player;
 import furkan.studio.casestudy.velocity.CaseStudy;
+import furkan.studio.casestudy.velocity.Teleports.TeleportManager;
 import furkan.studio.casestudy.velocity.Utils.Messages;
 import furkan.studio.casestudy.velocity.TeleportRules;
 
@@ -11,14 +12,32 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Created by Onwexrys
+ * This class is used to send a teleportation request or see the history of teleports.
+ * @see SimpleCommand for more information.
+ */
 public class TPACommand implements SimpleCommand {
-
+    /**
+     * Instance of the plugin to reduce unnecessary code.
+     */
     private final CaseStudy plugin;
 
-
+    /**
+     * Constructor for TPACommand.
+     */
     public TPACommand() {
         this.plugin = CaseStudy.instance;
     }
+
+    /**
+     * This method is what happens when command is executed.
+     * @see com.velocitypowered.api.command.SimpleCommand.Invocation
+     * @see net.kyori.adventure.audience.Audience
+     * @see TeleportManager
+     * @see Messages
+     * @param invocation
+     */
     @Override
     public void execute(Invocation invocation) {
         CommandSource source = invocation.source();
@@ -69,6 +88,14 @@ public class TPACommand implements SimpleCommand {
 
     }
 
+
+    /**
+     * This method is suggests commands to the player.
+     * @see com.velocitypowered.api.command.SimpleCommand.Invocation
+     * @see TeleportManager
+     * @param invocation
+     * @return
+     */
     @Override
     public List<String> suggest(Invocation invocation) {
         final String[] arguments = invocation.arguments();
@@ -82,11 +109,21 @@ public class TPACommand implements SimpleCommand {
         return suggestions;
     }
 
+    /**
+     * This method is used to check if player has permission to run this command
+     * @see SimpleCommand
+     * @param invocation
+     * @return
+     */
     @Override
     public boolean hasPermission(Invocation invocation) {
         return true;
     }
 
+    /**
+     * Util method to names of all players
+     * @return
+     */
     private List<String> getAllPlayers(){
         final List<String> players = new ArrayList<>();
         CaseStudy.server.getAllServers().forEach(server -> {
@@ -96,6 +133,12 @@ public class TPACommand implements SimpleCommand {
         });
         return players;
     }
+
+    /**
+     * Util method to get player by name
+     * @param name
+     * @return
+     */
     private Optional<Player> getPlayer(String name){
         return CaseStudy.server.getPlayer(name);
     }

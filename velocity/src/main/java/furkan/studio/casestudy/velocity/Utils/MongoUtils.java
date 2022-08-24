@@ -11,16 +11,45 @@ import com.mongodb.client.MongoDatabase;
 import lombok.Getter;
 
 
+/**
+ * Created by Onwexrys
+ * This is library class to initialize MongoDB connection.
+ */
 public class MongoUtils {
+    /**
+     * Reference of history collection
+     */
     public static String teleportHistoryCollection = null;
+    /**
+     * MongoClient instance
+     * @see MongoClient
+     */
     @Getter
     private static MongoClient mongoClient = null;
+
+    /**
+     * MongoDatabase instance
+     * @see MongoDatabase
+     */
     @Getter
     private static MongoDatabase mongoDatabase = null;
+
+    /**
+     * MongoCollection instance
+     * @see MongoCollection
+     */
     @Getter
     private static MongoCollection collection = null;
 
 
+
+    /**
+     * Reads the MongoDB connection data from config and uses it to initialize MongoDB connection.
+     * Alternative way to initialize MongoDB {@link MongoUtils#initialize(boolean, String, Integer, String, String, String, String)} method.
+     * @param config
+     * @see Configuration
+     * @return
+     */
     public static boolean initializeFromConfig(final Configuration config){
         MongoUtils.teleportHistoryCollection = config.getOrDefault("MongoDB.TeleportHistoryCollection", "teleporthistory");
         return MongoUtils.initialize(
@@ -33,6 +62,18 @@ public class MongoUtils {
                 config.getOrDefault("MongoDB.Password", null)
         );
     }
+
+    /**
+     * Initializes MongoDB connection.
+     * @param isSRVEnabled true if SRV is enabled, false otherwise.
+     * @param host hostname or IP address of the MongoDB server.
+     * @param port port number of the MongoDB server.
+     * @param stringDatabase database name.
+     * @param stringCollection collection name.
+     * @param username username of the MongoDB server.
+     * @param password password of the MongoDB server.
+     * @return
+     */
     public static boolean initialize(final boolean isSRVEnabled, final String host, final Integer port, final String stringDatabase, final String stringCollection, final String username, final String password) {
         String connectionString =
                 (isSRVEnabled ? "mongodb+srv://" : "mongodb://") +
@@ -57,6 +98,10 @@ public class MongoUtils {
         return true;
     }
 
+
+    /**
+     * Closes the MongoDB connection.
+     */
     public static void close(){
         if (mongoClient != null) mongoClient.close();
     }

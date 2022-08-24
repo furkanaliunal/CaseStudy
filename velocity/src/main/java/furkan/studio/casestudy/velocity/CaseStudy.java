@@ -26,22 +26,51 @@ import java.nio.file.Path;
     url = "https://github.com/furkanaliunal",
     authors = {"OnwexryS"}
 )
+
+/**
+ * Created by Onwexrys
+ * Main class of the velocity plugin
+ */
 public class CaseStudy {
 
-
+    /**
+     * Instance of the ProxyServer.
+     */
     public static ProxyServer server;
+    /**
+     * Instance of the plugin to use in other classes and plugins.
+     */
     public static CaseStudy instance;
 
-
+    /**
+     * Instance of the logger
+     */
     @Getter
     private final Logger logger;
+    /**
+     * Instance of the plugin data directory.
+     */
     @Getter
     private final Path dataDirectory;
 
+    /**
+     * Default configuration object of the plugin
+     * @see Configuration for more information.
+     */
     private final Configuration config;
+    /**
+     * Object to manage the teleport requests.
+     * @see TeleportManager for more information.
+     */
     @Getter
     private TeleportManager teleportManager;
 
+    /**
+     * Constructor for the main class of the plugin.
+     * @param server Instance of the ProxyServer.
+     * @param logger Instance of the logger.
+     * @param dataDirectory Instance of the plugin data directory.
+     */
     @Inject
     public CaseStudy(ProxyServer server, Logger logger, @DataDirectory Path dataDirectory) {
         CaseStudy.server = server;
@@ -51,6 +80,11 @@ public class CaseStudy {
         this.config = new Configuration(dataDirectory, "config.yml");
     }
 
+    /**
+     * Initializer of the plugin.
+     * Used to initialize the plugin and its components.
+     * @param event Event of the plugin initialization.
+     */
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent event) {
         config.reload();
@@ -65,7 +99,11 @@ public class CaseStudy {
         logger.info("CaseStudy started successfully");
     }
 
-
+    /**
+     * Cleanup of the plugin on disable.
+     * Used to clean up the plugin and its components.
+     * @param event Event of the plugin shutdown.
+     */
     @Subscribe
     public void onProxyShutdown(ProxyShutdownEvent event){
         teleportManager.getAcceptedTeleportsProcessScheduler().cancel();

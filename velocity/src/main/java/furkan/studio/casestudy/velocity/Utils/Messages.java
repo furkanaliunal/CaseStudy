@@ -16,6 +16,11 @@ import net.kyori.adventure.text.event.HoverEvent;
 import java.time.Instant;
 import java.util.*;
 
+/**
+ * Created by Onwexrys
+ * This class is used to load and store messages from the lang.yml file.
+ * This class is used to send messages to players.
+ */
 public enum Messages {
     TPA_LIST_TITLE_MESSAGE(),
     TPA_LIST_INTERMEDIATE_LINES(),
@@ -44,18 +49,32 @@ public enum Messages {
     TPA_DENY_PLAYER_NOT_FOUND(),
     TPA_DENY_SUCCESSFUL(),
     ;
-
+    /**
+     * Raw content of the message.
+     */
     @Getter
     private String message;
+    /**
+     * The message which shows up when player hover to the message.
+     */
     @Getter
     private String hoverMessage;
+    /**
+     * The message which is executed when player clicks the message.
+     */
     @Getter
     private String runCommand;
 
+    /**
+     * Constructor of the Messages enum.
+     */
     Messages(){
         this.message = null;
     }
 
+    /**
+     * Loads the messages from the lang.yml file.
+     */
     public static void reload(){
         Configuration configuration = new Configuration(CaseStudy.instance.getDataDirectory(), "lang.yml");
         configuration.reload();
@@ -65,6 +84,13 @@ public enum Messages {
             message.runCommand = configuration.getOrDefault(message.name()+"_RunCommand", null);
         });
     }
+
+    /**
+     * Sends the message to the player.
+     * @param audience - The audience of the player.
+     * @param message - The message enum to be sent.
+     * @param args - The arguments which will be replaced with {0}, {1} in the message.
+     */
     public static void sendMessage(final Audience audience, final Messages message, final String ... args){
         if (message.message == null) return;
         String strMessage = parseParameters(message.message, args);
@@ -81,6 +107,13 @@ public enum Messages {
         audience.sendMessage(textBuilder.build());
     }
 
+    /**
+     * Replaces the parameters in the message with the given arguments.
+     * Replaces {0} to args[0], {1} to args[1] and so on.
+     * @param message - The message to be parsed.
+     * @param args - The arguments to be replaced.
+     * @return
+     */
     private static String parseParameters(String message, final String ... args){
         if (args != null){
             for (int i = 0; i < args.length; i++){
@@ -90,6 +123,10 @@ public enum Messages {
         return message;
     }
 
+    /**
+     * Sends the message to the player.
+     * @param player - The player to send the message to.
+     */
     public static void sendTPAHistory(final Player player){
         final Audience audience = Audience.audience(player);
         final MongoCursor cursor = MongoUtils.getCollection().find(Filters.and(Filters.exists("location"), Filters.eq("UUID", player.getUniqueId().toString()))).sort(Sorts.descending("date")).limit(TeleportRules.getTeleportListHistorySize()).iterator();
