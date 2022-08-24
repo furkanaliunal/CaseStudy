@@ -14,8 +14,8 @@
     <description>Multiserver TPA request. It's an example project to show my skills on many things</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>16</maven.compiler.source>
-        <maven.compiler.target>16</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
     </properties>
     <url>https://github.com/furkanaliunal</url>
 

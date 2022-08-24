@@ -8,8 +8,12 @@ import com.velocitypowered.api.event.proxy.ProxyShutdownEvent;
 import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
-import furkan.studio.casestudy.velocity.Utils.Configuration;
-import furkan.studio.casestudy.velocity.Utils.RedisUtils;
+import furkan.studio.casestudy.velocity.Commands.TPACommand;
+import furkan.studio.casestudy.velocity.Commands.TPADenyCommand;
+import furkan.studio.casestudy.velocity.Commands.TPAcceptCommand;
+import furkan.studio.casestudy.velocity.Teleports.TeleportManager;
+import furkan.studio.casestudy.velocity.Utils.*;
+
 import lombok.Getter;
 import org.slf4j.Logger;
 
@@ -34,8 +38,9 @@ public class CaseStudy {
     @Getter
     private final Path dataDirectory;
 
-    private PlayerListSchedule playerListSchedule;
     private final Configuration config;
+    @Getter
+    private TeleportManager teleportManager;
 
     @Inject
     public CaseStudy(ProxyServer server, Logger logger, @DataDirectory Path dataDirectory) {
@@ -49,14 +54,25 @@ public class CaseStudy {
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent event) {
         config.reload();
-        RedisUtils.initalizeFromConfig(logger, config);
-        this.playerListSchedule = new PlayerListSchedule();
+        TeleportRules.initializeFromConfig(config);
+        RedisUtils.initializeFromConfig(logger, config);
+        MongoUtils.initializeFromConfig(config);
+        Messages.reload();
+        this.teleportManager = new TeleportManager();
+        server.getCommandManager().register("tpa", new TPACommand());
+        server.getCommandManager().register("tpaccept", new TPAcceptCommand());
+        server.getCommandManager().register("tpadeny", new TPADenyCommand());
         logger.info("CaseStudy started successfully");
     }
 
 
     @Subscribe
     public void onProxyShutdown(ProxyShutdownEvent event){
-        playerListSchedule.stopScheduler();
+        teleportManager.getAcceptedTeleportsProcessScheduler().cancel();
+        teleportManager.getPendingTeleportsTimeOutScheduler().cancel();
+        teleportManager.getCountdownPerTeleportRequestsScheduler().cancel();
+        RedisUtils.close();
+        MongoUtils.close();
+        logger.info("CaseStudy stopped");
     }
 }
