@@ -1,6 +1,6 @@
 name: CaseStudy
 version: '${project.version}'
-main: furkan.studio.casestudy.bukkit.CaseStudy
+main: io.github.furkanaliunal.casestudy.bukkit.CaseStudy
 api-version: 1.13
 depend: [ JedisDependency ]
 authors: [ Onwexrys ]
